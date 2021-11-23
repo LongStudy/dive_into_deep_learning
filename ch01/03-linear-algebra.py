@@ -5,8 +5,8 @@ x = torch.tensor([3.0])
 y = torch.tensor([2.0])
 print(x + y, x * y, x / y, x ** y)
 
-x = torch.arange(4)
 print('2.向量')
+x = torch.arange(4)
 print('x:', x)
 print('x[3]:', x[3])  # 通过张量的索引来访问任一元素
 print('张量的形状:', x.shape)  # 张量的形状
@@ -40,8 +40,8 @@ print('5.矩阵的sum运算')
 print('A:', A)
 print('A.shape:', A.shape)
 print('A.sum():', A.sum())
-print('A.sum(axis=0):', A.sum(axis=0))  # 沿0轴汇总以生成输出向量
-print('A.sum(axis=1):', A.sum(axis=1))  # 沿1轴汇总以生成输出向量
+print('A.sum(axis=0):', A.sum(axis=0))  # 沿0轴汇总以生成输出向量，压扁成一层
+print('A.sum(axis=1):', A.sum(axis=1))  # 沿1轴汇总以生成输出向量，压扁成一列
 print('A.sum(axis=1, keepdims=True)', A.sum(axis=1, keepdims=True))  # 计算总和保持轴数不变
 print('A.sum(axis=[0, 1]):', A.sum(axis=[0, 1]))  # Same as `A.sum()`
 print('A.mean():', A.mean())
@@ -52,7 +52,7 @@ x = torch.arange(4, dtype=torch.float32)
 y = torch.ones(4, dtype=torch.float32)
 print('x:', x)
 print('y:', y)
-print('向量-向量点积:', torch.dot(x, y))
+print('向量-向量点积torch.dot:', torch.dot(x, y))
 
 print('7.矩阵-向量相乘(向量积)')
 print('A:', A)  # 5*4维
@@ -76,7 +76,7 @@ print('矩阵的𝐿2范数:', torch.norm(v))  # 矩阵的𝐿2范数
 print('10.根据索引访问矩阵')
 y = torch.arange(10).reshape(5, 2)
 print('y:', y)
-index = torch.tensor([1, 4])
+index = torch.tensor([1, 4]) # 取出索引为1，4的值
 print('y[index]:', y[index])
 
 print('11.理解pytorch中的gather()函数')
@@ -88,6 +88,7 @@ b[1][2] = 1  ##给指定索引的元素赋值
 b[0][0] = 1  ##给指定索引的元素赋值
 print('b:', b)
 c = a.gather(0, b)  # dim=0
+print('c:', c)
 d = a.gather(1, b)  # dim=1
 print('d:', d)
 print('11.2三维矩阵上gather()函数')

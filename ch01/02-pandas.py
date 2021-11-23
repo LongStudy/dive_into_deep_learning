@@ -19,8 +19,8 @@ print('1.原始数据:\n', data)
 
 inputs, outputs = data.iloc[:, 0: 2], data.iloc[:, 2]
 inputs = inputs.fillna(inputs.mean())  # 用均值填充NaN
-print(inputs)
-print(outputs)
+print('inputs:\n', inputs)
+print('outputs:\n', outputs)
 # 利用pandas中的get_dummies函数来处理离散值或者类别值。
 # [对于 inputs 中的类别值或离散值，我们将 “NaN” 视为一个类别。] 由于 “Alley”列只接受两种类型的类别值 “Pave” 和 “NaN”
 inputs = pd.get_dummies(inputs, dummy_na=True)
