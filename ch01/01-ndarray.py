@@ -38,7 +38,7 @@ print(torch.exp(x))
 
 X = torch.arange(12, dtype=torch.float32).reshape(3, 4)
 Y = torch.tensor([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
-print('cat操作 dim=0', torch.cat((X, Y), dim=0))
+print('cat操作 dim=0', torch.cat((X, Y), dim=0))  # dim=0竖着加，dim=1横着加
 print('cat操作 dim=1', torch.cat((X, Y), dim=1))  # 连结（concatenate） ,将它们端到端堆叠以形成更大的张量。
 
 print('X == Y', X == Y)  # 通过 逻辑运算符 构建二元张量
@@ -69,6 +69,7 @@ before = id(Y)  # id()函数提供了内存中引用对象的确切地址
 Y = Y + X
 print(id(Y) == before)
 
+# X[:] = X + Y或X += Y来减少操作的内存开销
 before = id(X)
 X += Y
 print(id(X) == before)  # 使用 X[:] = X + Y 或 X += Y 来减少操作的内存开销。
@@ -87,4 +88,4 @@ print(type(B))  # 打印B的类型
 print(B)
 
 a = torch.tensor([3.5])
-print(a, a.item(), float(a), int(a))
+print(a, a.item(), float(a), int(a))    # tensor([3.5000]) 3.5 3.5 3
