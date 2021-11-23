@@ -2,13 +2,14 @@
 import torch
 
 print(dir(torch.distributions))
+# 该distributions包包含可参数化的概率分布和采样函数
 
 print('1.张量的创建')
 # ones 函数创建一个具有指定形状的新张量，并将所有元素值设置为 1
 t = torch.ones(4)
 print('t:', t)
 
-x = torch.arange(12)
+x = torch.arange(12)    # 创建0-11的一个向量
 print('x:', x)
 print('x shape:', x.shape)  # 访问向量的形状
 
