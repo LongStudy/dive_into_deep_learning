@@ -87,9 +87,9 @@ b = torch.zeros_like(a)
 b[1][2] = 1  ##给指定索引的元素赋值
 b[0][0] = 1  ##给指定索引的元素赋值
 print('b:', b)
-c = a.gather(0, b)  # dim=0
+c = a.gather(0, b)  # dim=0，按第一纬度
 print('c:', c)
-d = a.gather(1, b)  # dim=1
+d = a.gather(1, b)  # dim=1，按第二维度
 print('d:', d)
 print('11.2三维矩阵上gather()函数')
 a = torch.randint(0, 30, (2, 3, 5))
@@ -115,8 +115,9 @@ d = torch.gather(a, 0, index2)
 print('d:', d)
 
 print('12.理解pytorch中的max()和argmax()函数')
-a = torch.tensor([[1, 2, 3], [3, 2, 1]])
+a = torch.tensor([[10, 8, 2], [4, 2, 1]])
 b = a.argmax(1)
+# torch.argmax与.argmax不同
 c = a.max(1)
 d = a.max(1)[1]
 print('a:', a)
