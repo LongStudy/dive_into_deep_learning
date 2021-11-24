@@ -19,11 +19,11 @@
 ##### ch02. 线性神经网络  
 2.1. [线性回归](./ch02/01-linear-regression.py)  
 2.2. [线性回归的从零开始实现](./ch02/02-linear-regression-scratch.py)  
-2.3. 线性回归的简洁实现  
+2.3. [线性回归的简洁实现](./ch02/03-linear-regression-concise.py)  
 2.4. softmax回归  
 2.5. [图像分类数据集](./d2lutil/common.py)  
-2.6. [softmax回归的从零开始实现](./ch02/03-softmax-linear-regression-scratch.py)  
-2.7. [softmax回归的简洁实现](./ch02/04-softmax-linear-regression-concise.py)  
+2.6. [softmax回归的从零开始实现](./ch02/06-softmax-linear-regression-scratch.py)  
+2.7. [softmax回归的简洁实现](./ch02/07-softmax-linear-regression-concise.py)  
 ##### ch03. 多层感知机  
 3.1. [多层感知机](./ch03/01-mlp.py)  
 3.2. [多层感知机的从零开始实现](./ch03/02-mlp-from-zero.py)  
