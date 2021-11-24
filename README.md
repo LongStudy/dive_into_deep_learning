@@ -15,7 +15,7 @@
 1.3. [线性代数](./ch01/03-linear-algebra.py)  
 1.4. [微分](./ch01/04-calculus.py)  
 1.5. [自动求导](./ch01/05-autograd.py)  
-1.6. 概率 
+1.6. [概率](./ch01/06-probability.py)
 ##### ch02. 线性神经网络  
 2.1. [线性回归](./ch02/01-linear-regression.py)  
 2.2. [线性回归的从零开始实现](./ch02/02-linear-regression-scratch.py)  
