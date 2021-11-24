@@ -5,6 +5,7 @@ import numpy as np
 import torch
 from d2l import torch as d2l
 
+# 允许重复加载动态库
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 n = 10000
@@ -15,12 +16,12 @@ timer = d2l.Timer()
 for i in range(n):
     c[i] = a[i] + b[i]
 print(c)
-print("{0:.5f} sec".format(timer.stop()))
+print("for循环耗时：{0:.5f} sec".format(timer.stop()))
 
 timer.start()
 d = a + b
 print(d)
-print("{0:.5f} sec".format(timer.stop()))
+print("+运算耗时：{0:.5f} sec".format(timer.stop()))
 
 
 def normal(x, mu, sigma):
