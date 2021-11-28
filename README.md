@@ -20,7 +20,7 @@
 2.1. [线性回归](./ch02/01-linear-regression.py)  
 2.2. [线性回归的从零开始实现](./ch02/02-linear-regression-scratch.py)  
 2.3. [线性回归的简洁实现](./ch02/03-linear-regression-concise.py)  
-2.4. [softmax回归 ](./ch02/04-softmax-regression.py) 
+2.4. [softmax回归 ](./ch02/04-softmax-regression.py)  
 2.5. [图像分类数据集](ch02/05-image-classification-dataset.py)  
 2.6. [softmax回归的从零开始实现](./ch02/06-softmax-linear-regression-scratch.py)  
 2.7. [softmax回归的简洁实现](./ch02/07-softmax-linear-regression-concise.py)  
