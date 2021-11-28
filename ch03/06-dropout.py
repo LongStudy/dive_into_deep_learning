@@ -1,12 +1,8 @@
 import os
-import sys
-
 import torch
-from d2l import torch as d2l
 from torch import nn
+from d2l import torch as d2l
 
-sys.path.append('D:\\pythonspace\\d2l\\d2lutil')  # 加入路径，添加目录
-import common
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
@@ -22,39 +18,76 @@ def dropout_layer(X, dropout):
     mask = (torch.Tensor(X.shape).uniform_(0, 1) > dropout).float()
     return mask * X / (1.0 - dropout)
 
+print('通过几个例子来测试dropout_layer函数')
+X= torch.arange(16, dtype = torch.float32).reshape((2, 8))
+print(X)
+print(dropout_layer(X, 0.))
+print(dropout_layer(X, 0.5))
+print(dropout_layer(X, 1.))
 
-num_inputs, num_outputs, num_hidden1, num_hidden2 = 784, 10, 256, 256
+# 定义模型参数
+num_inputs, num_outputs, num_hiddens1, num_hiddens2 = 784, 10, 256, 256
+# 定义模型
 dropout1, dropout2 = 0.2, 0.5
 
-
 class Net(nn.Module):
-    def __init__(self, num_inputs, num_outputs, num_hidden1, num_hidden2, is_training=True):
+    def __init__(self, num_inputs, num_outputs, num_hiddens1, num_hiddens2,
+                 is_training = True):
         super(Net, self).__init__()
         self.num_inputs = num_inputs
         self.training = is_training
-        self.lin1 = nn.Linear(num_inputs, num_hidden1)
-        self.lin2 = nn.Linear(num_hidden1, num_hidden2)
-        self.lin3 = nn.Linear(num_hidden2, num_outputs)
+        self.lin1 = nn.Linear(num_inputs, num_hiddens1)
+        self.lin2 = nn.Linear(num_hiddens1, num_hiddens2)
+        self.lin3 = nn.Linear(num_hiddens2, num_outputs)
         self.relu = nn.ReLU()
 
     def forward(self, X):
         H1 = self.relu(self.lin1(X.reshape((-1, self.num_inputs))))
         # 只有在训练模型时才使用dropout
-        if self.training:
+        if self.training == True:
             # 在第一个全连接层之后添加一个dropout层
             H1 = dropout_layer(H1, dropout1)
         H2 = self.relu(self.lin2(H1))
-        if self.training:
+        if self.training == True:
             # 在第二个全连接层之后添加一个dropout层
             H2 = dropout_layer(H2, dropout2)
         out = self.lin3(H2)
         return out
 
 
-net = Net(num_inputs, num_outputs, num_hidden1, num_hidden2)
+net = Net(num_inputs, num_outputs, num_hiddens1, num_hiddens2)
+
+# 训练和测试
 num_epochs, lr, batch_size = 10, 0.5, 256
 loss = nn.CrossEntropyLoss()
-train_iter, test_iter = common.load_fashion_mnist(batch_size)
-print(len(train_iter))
+train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
 trainer = torch.optim.SGD(net.parameters(), lr=lr)
+d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.plt.show()
+
+
+
+
+# 简洁实现
+net = nn.Sequential(nn.Flatten(),
+        nn.Linear(784, 256),
+        nn.ReLU(),
+        # 在第一个全连接层之后添加一个dropout层
+        nn.Dropout(dropout1),
+        nn.Linear(256, 256),
+        nn.ReLU(),
+        # 在第二个全连接层之后添加一个dropout层
+        nn.Dropout(dropout2),
+        nn.Linear(256, 10))
+
+def init_weights(m):
+    if type(m) == nn.Linear:
+        nn.init.normal_(m.weight, std=0.01)
+
+net.apply(init_weights)
+
+trainer = torch.optim.SGD(net.parameters(), lr=lr)
+d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+d2l.plt.show()
+
 

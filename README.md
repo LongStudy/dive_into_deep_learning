@@ -29,8 +29,8 @@
 3.2. [多层感知机的从零开始实现](./ch03/02-mlp-from-zero.py)  
 3.3. [多层感知机的简洁实现](./ch03/03-mlp-simple.py)  
 3.4. [模型选择、欠拟合和过拟合](./ch03/04-underfit-overfit.py)  
-3.5. [权重衰减](./ch03/05-weight-decay-simple.py)  
-3.6. [Dropout](./ch03/06-dropout-simple.py)  
+3.5. [权重衰减](./ch03/05-weight-decay.py)  
+3.6. [Dropout](./ch03/06-dropout.py)  
 3.7. 正向传播、反向传播和计算图  
 3.8. 数值稳定性和模型初始化  
 3.9. 环境和分布偏移  
