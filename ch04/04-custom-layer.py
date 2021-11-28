@@ -1,5 +1,4 @@
 import os
-
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -39,11 +38,10 @@ class MyLinear(nn.Module):
 
 
 print('2.带参数的层')
-dense = MyLinear(5, 3)
-print(dense.weight)
+linear = MyLinear(5, 3)
+print(linear.weight)
 
-Y = dense(torch.rand(2, 5))
-print(Y)
+print(linear(torch.rand(2, 5)))
 
 net = nn.Sequential(MyLinear(64, 8), MyLinear(8, 1))
 print(net(torch.rand(2, 64)))

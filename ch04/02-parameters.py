@@ -1,5 +1,4 @@
 import os
-
 import torch
 from torch import nn
 
@@ -13,29 +12,30 @@ print('1.访问第二个全连接层的参数')
 print(net[2].state_dict())  # 当通过Sequential类定义模型时，我们可以通过索引来访问模型的任意层
 print(net[2].bias)  # 第二个神经网络层提取偏置
 print(net[2].bias.data)  # 第二个神经网络层提取偏置的实际值
-print(net[2].weight.grad is None)  # 由于我们还没有调用这个网络的反向传播，所以参数的梯度处于初始状态。
+print(net[2].weight.grad == None)  # 由于我们还没有调用这个网络的反向传播，所以参数的梯度处于初始状态。
 
 print('2.一次性访问所有参数')
 print(*[(name, param.shape) for name, param in net[0].named_parameters()])  # 输入层的参数
 print(*[(name, param.shape) for name, param in net.named_parameters()])
-
+print(net.state_dict()['2.bias'].data)
 
 # 3.嵌套块的参数
 def block1():
-    return nn.Sequential(nn.Linear(4, 8), nn.ReLU(), nn.Linear(8, 4), nn.ReLU())
-
+    return nn.Sequential(nn.Linear(4, 8), nn.ReLU(),
+                         nn.Linear(8, 4), nn.ReLU())
 
 def block2():
     net = nn.Sequential()
     for i in range(4):
-        net.add_module(f'block{i}', block1())
+        # 在这里嵌套
+        net.add_module(f'block {i}', block1())
     return net
-
-
 print('3.嵌套块的参数')
 rgnet = nn.Sequential(block2(), nn.Linear(4, 1))
-print(rgnet)
 print(rgnet(X))
+
+print(rgnet)
+
 print(rgnet[0][1][0].bias.data)  # 访问第一个主要的块，其中第二个子块的第一层的偏置项
 
 
@@ -57,7 +57,6 @@ def init_constant(m):
         nn.init.constant_(m.weight, 1)
         nn.init.zeros_(m.bias)
 
-
 print('4.2所有参数初始化为给定的常数')
 net.apply(init_constant)
 print(net[0].weight.data[0], net[0].bias.data[0])
@@ -67,8 +66,6 @@ print(net[0].weight.data[0], net[0].bias.data[0])
 def xavier(m):
     if type(m) == nn.Linear:
         nn.init.xavier_uniform_(m.weight)
-
-
 def init_42(m):
     if type(m) == nn.Linear:
         nn.init.constant_(m.weight, 42)
@@ -92,6 +89,10 @@ def my_init(m):
 print('5.参数自定义初始化')
 net.apply(my_init)
 print(net[0].weight[:2])
+
+net[0].weight.data[:] += 1
+net[0].weight.data[0, 0] = 42
+print(net[0].weight.data[0])
 
 # 6.多个层间共享参数
 # 我们需要给共享层一个名称，以便可以引用它的参数。

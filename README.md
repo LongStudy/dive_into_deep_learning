@@ -38,9 +38,9 @@
 ##### ch04. 深度学习计算  
 4.1. [层和块](./ch04/01-model-construction.py)  
 4.2. [参数管理](./ch04/02-parameters.py)  
-4.3. 延后初始化  
-4.4. [自定义层](./ch04/03-custom-layer.py)  
-4.5. [读写文件](./ch04/04-read-write.py)  
+4.3. [延后初始化](./ch04/03-deferred-init.py)  
+4.4. [自定义层](./ch04/04-custom-layer.py)  
+4.5. [读写文件](./ch04/05-read-write.py)  
 4.6. GPU  
 ##### ch05. 卷积神经网络  
 5.1. 二维卷积层  

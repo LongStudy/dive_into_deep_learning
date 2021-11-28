@@ -1,5 +1,4 @@
 import os
-
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -14,6 +13,10 @@ x2 = torch.load("x-file")
 print(x2)
 
 y = torch.zeros(4)
+torch.save([x, y],'x-files')
+x2, y2 = torch.load('x-files')
+print((x2, y2))
+
 mydict = {'x': x, 'y': y}
 torch.save(mydict, 'mydict')
 mydict2 = torch.load('mydict')
@@ -32,12 +35,12 @@ class MLP(nn.Module):
 net = MLP()
 X = torch.randn(size=(2, 20))
 Y = net(X)
-print(Y)
 
 torch.save(net.state_dict(), 'mlp.params')
 
-clone_net = MLP()
-clone_net.load_state_dict(torch.load("mlp.params"))
+clone = MLP()
+clone.load_state_dict(torch.load('mlp.params'))
+clone.eval()
+Y_clone = clone(X)
 
-Y_clone = clone_net(X)
-print(Y_clone)
+print(Y_clone == Y)
