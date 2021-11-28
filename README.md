@@ -41,7 +41,7 @@
 4.3. [延后初始化](./ch04/03-deferred-init.py)  
 4.4. [自定义层](./ch04/04-custom-layer.py)  
 4.5. [读写文件](./ch04/05-read-write.py)  
-4.6. GPU  
+4.6. [GPU](./ch04/06-use-gpu.py)  
 ##### ch05. 卷积神经网络  
 5.1. 二维卷积层  
 5.2. 填充和步幅  
