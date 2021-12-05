@@ -103,7 +103,7 @@ class Accumulator:
 # evaluate_accuracy(net, test_iter)
 # 0.1713
 
-# 本函数已保存在d2lzh包中方便以后使用
+# 本函数已保存在d2l包中方便以后使用
 def train_epoch_ch3(net, train_iter, loss, updater):
     """训练模型一个迭代周期（定义见第3章）。"""
     # 将模型设置为训练模式

@@ -90,14 +90,14 @@ all_features[numeric_features] = all_features[numeric_features].apply(
 all_features[numeric_features] = all_features[numeric_features].fillna(0)
 # `Dummy_na=True` 将“na”（缺失值）视为有效的特征值，并为其创建指示符特征。
 all_features = pd.get_dummies(all_features, dummy_na=True)
-print(all_features.shape)
+print('all_features shape:', all_features.shape)
 # 此转换会将特征的数量从79个增加到331个
 n_train = train_data.shape[0]
 train_features = torch.tensor(all_features[:n_train].values, dtype=d2l.float32)
 test_features = torch.tensor(all_features[n_train:].values, dtype=d2l.float32)
 train_labels = torch.tensor(
     train_data.SalePrice.values.reshape(-1, 1), dtype=d2l.float32)
-
+print('shape:', train_features.shape, train_labels.shape, test_features.shape)
 
 # 训练
 loss = nn.MSELoss()
